@@ -1,0 +1,24 @@
+<h1>Login</h1>
+
+<% if @session.errors.any? %>
+  <% @session.errors.full_messages.each do |msg| %>
+    <p><%= msg %></p>
+  <% end %>
+<% end %>
+
+<%= form_for :login, :url => login_attempt_session_path do |f| %>
+  <p>
+    Username<br>
+    <%= f.text_field :username %>
+  </p>
+  <p>
+    Password<br>
+    <%= f.text_field :password %>
+  </p>
+  <p>
+    <%= f.submit "Login" %>
+  </p>
+<% end %>
+<p>
+  New here? <%= link_to 'Sign up!', new_user_path %>
+</p>

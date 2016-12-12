@@ -1,0 +1,40 @@
+<h1>Create a New User</h1>
+
+<% if @user.errors.any? %>
+  <div id='error_msg'>
+    <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_for :user, :url => user_path do |f| %>
+  <p>
+    Name<br>
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    Username<br>
+    <%= f.text_field :username %>
+  </p>
+  <p>
+    Admin? <%= f.check_box :admin %>
+  </p>
+  <p>
+    Password<br>
+    <%= f.text_field :password %>
+  </p>
+  <p>
+    Re-type your password<br>
+    <%= f.text_field :password_confirmation %>
+  </p>
+  <p>
+    <%= f.submit "Sign up" %>
+  </p>
+<% end %>
+<p>
+  Or, if you already have an account, 
+  <%= link_to 'login.', login_session_path %>
+</p>

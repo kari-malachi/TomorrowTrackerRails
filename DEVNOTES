@@ -1,0 +1,25 @@
+Users
+- intended to handle signups etc
+- model generated
+- controller generated
+- views
+  - new
+    - for "registration" of new users
+    - TODO: if session indicates the user is already logged in,
+      redirect to show
+  - show
+    - shows current user's information
+    - TODO: if session indicates no user is logged in, redirect to
+      login page
+    - TODO: link to user update page (change password)
+    - TODO: link to a home page
+  - edit
+- migration file
+
+Sessions
+- intended to handle sessions and login etc
+- model generated
+- controller generated
+- views
+  - login
+    - for login of existing user

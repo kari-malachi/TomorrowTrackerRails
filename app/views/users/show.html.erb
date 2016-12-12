@@ -1,0 +1,8 @@
+<h1><%= @user.username %>'s Page</h1>
+
+<p>
+  Username: <%= @user.username %>
+  Name:     <%= @user.name %>
+</p>
+
+<%= link_to 'Change Password', edit_user_path(@user) %>
