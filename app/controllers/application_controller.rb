@@ -1,23 +1,25 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
+  helper_method :current_user
 
-  protected
-  def authenticate_user
-    if session[:user_id]
-      @current_user = User.find(session[:user_id])
-      return true
-    else
-      redirect_to 'sessions#login'
-      return false
+  private
+    def logged_in_checker
+      if current_user
+        yield
+      else
+        redirect_to login_session_url
+      end
     end
-  end
-
-  def save_login_state
-    if session[:user_id]
-      redirect_to 'sessions#home'
-      return false
-    else
-      return true
+ 
+    def not_logged_in_checker
+      if current_user
+        redirect_to users_url
+      else
+        yield
+      end
     end
-  end
+   
+    def current_user
+      @current_user ||= User.find(session[:user_id]) if session[:user_id]
+    end
 end

@@ -10,15 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161208003408) do
-
-  create_table "sessions", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
+ActiveRecord::Schema.define(version: 20161213184000) do
 
   create_table "users", force: :cascade do |t|
-    t.string   "name"
     t.string   "username"
     t.string   "encrypted_password"
     t.string   "salt"

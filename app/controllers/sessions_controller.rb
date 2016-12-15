@@ -1,31 +1,25 @@
 class SessionsController < ApplicationController
-  attr_reader :errors
-  
-  before_action :authenticate_user, :only => [:home]
-  before_action :save_login_state, :only => [:login, :login_attempt]
-  
-  def login
-    @session = Session.new
+  def new
+    not_logged_in_checker {}
   end
 
-  def logout
-    session[:user_id] = nil
-    redirect_to 'login'
+  def create
+    not_logged_in_checker {
+      user = User.authenticate(params[:username], params[:password])
+      if user
+        session[:user_id] = user.id
+        redirect_to show_user_url(user.id)
+      else
+        flash.now.alert = "Invalid username or password"
+        render 'new'
+      end
+    }
   end
 
-  def home
-    @session = Session.find(params[:id])
-  end
-
-  def login_attempt
-    @session = Session.new
-    authorized_user = User.authenticate(params[:username], params[:password])
-    if authorized_user
-      session[:user_id] = authorized_user.id
-      redirect_to :action => 'home'
-    else
-      @session.errors.add(:login, 'failed. Invalid username or password.')
-      render 'login'
-    end
+  def destroy
+    logged_in_checker {
+      session[:user_id] = nil
+      redirect_to login_session_url
+    }
   end
 end

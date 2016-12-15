@@ -1,39 +1,57 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user, :only => [:edit, :show, :update]
-  before_action :save_login_state, :only => [:new, :create]
-
   def new
-    @user = User.new
+    not_logged_in_checker { @user = User.new }
   end
 
   def create
-    @user = User.new(user_params)
-    if @user.save
-      redirect_to @user
-    else
-      render 'new'
-    end
+    not_logged_in_checker {
+      @user = User.new(user_params)
+      if @user.save
+        redirect_to login_session_url
+      else
+        render 'new'
+      end
+    }
   end
 
   def show
-    @user = User.find(params[:id])
+    logged_in_checker {
+      @user = User.find(params[:id])
+    }
   end
 
-  def edit
-    @user = User.find(params[:id])
+  def index
+    logged_in_checker {
+      @users = User.all
+    }
   end
 
-  def update
-    @user = User.find(params[:id])
-    if @user.update(user_params)
-      redirect_to @user
-    else
-      render 'edit'
-    end
+  def destroy
+    logged_in_checker {
+      @user = User.find(params[:id])
+      @user.destroy
+      redirect_to users_url
+    }
   end
 
   private
+    def logged_in_checker
+      if current_user
+        yield
+      else
+        redirect_to login_session_url
+      end
+    end
+
+    def not_logged_in_checker
+      if current_user
+        redirect_to users_url
+      else
+        yield
+      end
+    end
+
     def user_params
-      params.require(:user).permit(:name, :username, :admin, :password, :password_confirmation, :encrypted_password)
+      params.require(:user).permit(:username, :password, :password_confirmation)
     end
 end
