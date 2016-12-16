@@ -57,7 +57,6 @@ class UsersController < ApplicationController
   private
     def logged_in_checker
       if current_user
-        #yield params
         yield
       else
         redirect_to login_session_url
@@ -68,15 +67,13 @@ class UsersController < ApplicationController
       if current_user
         redirect_to users_url
       else
-        #yield params
         yield
       end
     end
 
     def called_by_admin
       if current_user.admin?
-        yield params
-        # yield
+        yield 
       else
         redirect_to users_url
       end
