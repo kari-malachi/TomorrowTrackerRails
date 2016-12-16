@@ -14,6 +14,26 @@ class UsersController < ApplicationController
     }
   end
 
+  def make_admin
+    logged_in_checker {
+      called_by_admin {
+        @user = User.find(params[:id])
+        @user.update(type: 'Admin')
+        redirect_to show_user_url
+      }
+    }
+  end
+
+  def revoke_admin
+    logged_in_checker {
+      called_by_admin {
+        @user = User.find(params[:id])
+        @user.update(type: '')
+        redirect_to show_user_url
+      }
+    }
+  end
+
   def show
     logged_in_checker {
       @user = User.find(params[:id])
@@ -37,6 +57,7 @@ class UsersController < ApplicationController
   private
     def logged_in_checker
       if current_user
+        #yield params
         yield
       else
         redirect_to login_session_url
@@ -47,11 +68,21 @@ class UsersController < ApplicationController
       if current_user
         redirect_to users_url
       else
+        #yield params
         yield
       end
     end
 
+    def called_by_admin
+      if current_user.admin?
+        yield params
+        # yield
+      else
+        redirect_to users_url
+      end
+    end
+
     def user_params
-      params.require(:user).permit(:username, :password, :password_confirmation)
+      params.require(:user).permit(:name, :username, :password, :password_confirmation, :type)
     end
 end

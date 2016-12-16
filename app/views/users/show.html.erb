@@ -1,7 +1,26 @@
 <h1>Show User</h1>
 
 <p>
-  <%= @user.username %>  
+  Name: <%= @user.name %>
 </p>
-<%= link_to 'Delete this User', delete_user_path(@user), method: :delete %>
+<p>
+  Username: <%= @user.username %>  
+</p>
+<% if @user.admin? %>
+  <p>
+    Admin
+  </p>
+<% end %>
+<% if current_user.admin? && current_user != @user%>
+  <%= link_to 'Delete this User',
+      delete_user_path(@user),
+      method: :delete %><br>
+  <% if not @user.admin? %>
+    <%= link_to 'Make this User an Admin',
+        make_admin_path(@user) %><br>
+  <% else %>
+    <%= link_to 'Revoke Admin Privileges',
+        revoke_admin_path(@user) %><br>
+  <% end %>
+<% end %>
 <%= link_to 'Return to Index', users_path %>

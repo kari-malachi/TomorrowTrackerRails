@@ -4,6 +4,7 @@
   <% @users.each do |user| %>
     <tr>
       <td><%= link_to user.username, show_user_path(user) %></td>
+      <td><%= user.type %></td>
     </tr>
   <% end %>
 </table>

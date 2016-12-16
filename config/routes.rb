@@ -8,6 +8,8 @@ Rails.application.routes.draw do
 
   get '/user/new', to: 'users#new', as: 'new_user'
   post '/user', to: 'users#create', as: 'create_user'
+  get '/user/:id/make_admin', to: 'users#make_admin', as: 'make_admin'
+  get '/user/:id/revoke_admin', to: 'users#revoke_admin', as: 'revoke_admin'
   get '/user/:id', to: 'users#show', as: 'show_user'
   get '/users', to: 'users#index', as: 'users'
   delete '/user/:id', to: 'users#destroy', as: 'delete_user'

@@ -1,13 +1,18 @@
 class User < ApplicationRecord
   attr_accessor :password
 
+  validates :name, :presence => true
   validates :username, :presence => true,
                        :length => { :maximum => 18 },
-		       :uniqueness => true
+		               :uniqueness => true
   validates :password, :confirmation => true
   validates :password, :presence => true, :on => :create
 
   before_save :encrypt_password
+  
+  def admin?
+    type == 'Admin'
+  end
 
   def self.authenticate(username, password)
     user = find_by_username(username)

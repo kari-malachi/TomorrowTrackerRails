@@ -12,6 +12,10 @@
 
 <%= form_for @user, url: create_user_path(@user) do |f| %>
   <p>
+    Your Name<br>
+    <%= f.text_field :name %>
+  </p>
+  <p>
     Username<br>
     <%= f.text_field :username %>
   </p>
