@@ -1,5 +1,12 @@
+<<<<<<< HEAD
 Want to implement stack creation - assign generic user to stack as stacker
  - make sure to check that the user is generic
  - bring up some sort of error if they aren't
  - maybe instead of that implement a check (like login_checker) that redirects if the user is not generic
+=======
+deploy to AWS and test
+
+made a chance to test git
+
+>>>>>>> 6b94d971854fe42b64994c55467d38a8e0ff56a9
 Move to event tracking
