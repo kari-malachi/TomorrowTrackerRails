@@ -37,6 +37,12 @@ class UsersController < ApplicationController
   def show
     logged_in_checker {
       @user = User.find(params[:id])
+      case @user.type
+      when 'Stacker'
+        @stackers = Stacker.find_all_in_stack(@user.stack_id)
+        @stackees = Stackee.find_all_in_stack(@user.stack_id)
+      end
+      render 'show' + @user.type
     }
   end
 

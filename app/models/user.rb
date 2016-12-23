@@ -14,6 +14,14 @@ class User < ApplicationRecord
     type == 'Admin'
   end
 
+  def stacker?
+    type == 'Stacker'
+  end
+
+  def stackee?
+    type == 'Stackee'
+  end
+
   def self.authenticate(username, password)
     user = find_by_username(username)
     if user && user.match_password(password)

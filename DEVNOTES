@@ -1,3 +1,5 @@
-deploy to AWS and test
-
+Want to implement stack creation - assign generic user to stack as stacker
+ - make sure to check that the user is generic
+ - bring up some sort of error if they aren't
+ - maybe instead of that implement a check (like login_checker) that redirects if the user is not generic
 Move to event tracking
