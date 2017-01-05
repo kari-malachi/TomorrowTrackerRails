@@ -13,6 +13,10 @@
       <% if current_user %>
         Logged in as <%= current_user.username %>
         <%= link_to 'Logout', logout_session_path, method: :delete %>
+        <% if current_user.admin? %>
+          <%= link_to 'Users Index', users_path %>
+          <%= link_to 'Stacks Index', stacks_path %>
+        <% end %>
       <% else %>
         Welcome, Guest
         <%= link_to 'Login', login_session_path %>

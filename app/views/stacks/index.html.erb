@@ -1,0 +1,15 @@
+<div id='page_title'>
+  <h1>Existing Stacks</h1>
+</div>
+
+<table>
+  <% @stacks.each do |stack| %>
+    <tr>
+      <td><%= stack.name %></td>
+      <td><%= link_to 'See Details', show_stack_path(stack) %></td>
+      <td><%= link_to 'Delete this Stack',
+              delete_stack_path(stack),
+              method: :delete %></td>
+    <tr>
+  <% end %>
+</table>

@@ -13,4 +13,13 @@ Rails.application.routes.draw do
   get '/user/:id', to: 'users#show', as: 'show_user'
   get '/users', to: 'users#index', as: 'users'
   delete '/user/:id', to: 'users#destroy', as: 'delete_user'
+
+  get '/stack/new', to: 'stacks#new', as: 'new_stack'
+  post '/stack', to: 'stacks#create', as: 'create_stack'
+  get '/stack/edit/:id', to: 'stacks#edit', as: 'edit_stack'
+  patch '/stack/:id', to: 'stacks#update', as: 'update_stack'
+  get '/stack/add_stackers/:id', to: 'stacks#add_stacker', as: 'add_stacker'
+  get '/stack/:id', to: 'stacks#show', as: 'show_stack'
+  get '/stacks', to: 'stacks#index', as: 'stacks'
+  delete '/stack/:id', to: 'stacks#destroy', as: 'delete_stack'
 end

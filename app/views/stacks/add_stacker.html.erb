@@ -1,0 +1,9 @@
+<div id='page_title'>
+  <h1>Add Stackers</h1>
+</div>
+<%= render 'shared/stack_info' %>
+<%= form_for @stack, url: update_stack_path(@stack) do |f| %>
+  <%= f.collection_check_boxes :stackers, @users, :id, :name %>
+  <%= f.submit 'Add to Stack' %>
+<% end %>
+<%= link_to 'Cancel', show_stack_path(@stack) %>

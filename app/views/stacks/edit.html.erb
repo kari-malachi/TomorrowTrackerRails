@@ -1,0 +1,19 @@
+<div id='page_title'>
+  <h1>Edit this Stack</h1>
+</div>
+
+<%= form_for @stack, url: update_stack_path do |f| %>
+  <p>
+    Stack Name:
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    Description:
+    <%= f.text_area :description %>
+  </p>
+  <p>
+    <%= f.submit 'Update Stack' %>
+    </p>
+<% end %>
+
+<%= link_to 'Cancel', show_user_path(@current_user) %>

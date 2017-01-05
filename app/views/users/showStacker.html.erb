@@ -1,24 +1,3 @@
-<div id='page_title'>
-  <h1>Stacker Home</h1>
-</div>
-
-<div id='stack_info'>
-  <p>
-    Stack Name: <%= @user.stack.name %>
-  </p>
-  <p>
-    Stackers: <br>
-    <% @stackers.each do |stacker| %>
-      <%= stacker.name %> (<%= stacker.username %>)<br>
-    <% end %>    
-  <p>
-    Description: <%= @user.stack.description %>
-  </p>
-  <p>
-    Stackees: <br>
-    <% @stackees.each do |stackee| %>
-      <%= stackee.name %> (<%= stackee.username %>)<br>
-    <% end %>
-  </p>
-</div>
-
+<%= render 'show_common' %>
+<%= render 'shared/stack_info' %>
+<%= render 'show_tail' %>

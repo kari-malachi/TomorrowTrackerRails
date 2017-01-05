@@ -1,0 +1,24 @@
+<div id='page_title'>
+  <h1>Create a Stack</h1>
+</div>
+
+<p>
+  Creating a stack will make you into its Stacker.
+  You may add more stackers after creating the stack.
+</p>
+
+<%= form_for @stack, url: create_stack_path do |f| %>
+  <p>
+    Stack Name:
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    Description:
+    <%= f.text_area :description %>
+  </p>
+  <p>
+    <%= f.submit 'Create Stack' %>
+    </p>
+<% end %>
+
+<%= link_to 'Cancel', show_user_path(@current_user) %>

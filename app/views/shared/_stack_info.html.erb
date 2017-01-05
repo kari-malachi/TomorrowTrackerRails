@@ -1,0 +1,23 @@
+<div id='stack_info'>
+  <p>
+    Stack Name: <%= link_to @stack.name, show_stack_path(@stack) %>
+  </p>
+  <p>
+    Stackers: <br>
+    <% @stackers.each do |stacker| %>
+      <%= stacker.name %> (<%= stacker.username %>)
+      <% if current_user.admin? %>
+        <%= link_to 'See this User', show_user_url(stacker) %>
+      <% end %>
+      <br>
+    <% end %>    
+  <p>
+    Description: <%= @stack.description %>
+  </p>
+  <p>
+    Stackees: <br>
+    <% @stackees.each do |stackee| %>
+      <%= stackee.name %> (<%= stackee.username %>)<br>
+    <% end %>
+  </p>
+</div>

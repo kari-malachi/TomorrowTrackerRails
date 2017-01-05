@@ -1,26 +1,15 @@
-<h1>Show User</h1>
-
-<p>
-  Name: <%= @user.name %>
-</p>
-<p>
-  Username: <%= @user.username %>  
-</p>
-<% if @user.admin? %>
+<%= render 'show_common' %>
+<% if current_user == @user %>
   <p>
-    Admin
+    <%= link_to 'Create a Stack', new_stack_path %> or 
+    todo: Join a Stack  
   </p>
 <% end %>
 <% if current_user.admin? && current_user != @user%>
   <%= link_to 'Delete this User',
       delete_user_path(@user),
       method: :delete %><br>
-  <% if not @user.admin? %>
-    <%= link_to 'Make this User an Admin',
-        make_admin_path(@user) %><br>
-  <% else %>
-    <%= link_to 'Revoke Admin Privileges',
-        revoke_admin_path(@user) %><br>
-  <% end %>
+  <%= link_to 'Make this User an Admin',
+      make_admin_path(@user) %><br>
 <% end %>
-<%= link_to 'Return to Index', users_path %>
+<%= render 'show_tail' %>

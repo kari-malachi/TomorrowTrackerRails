@@ -13,9 +13,17 @@ class ApplicationController < ActionController::Base
  
     def not_logged_in_checker
       if current_user
-        redirect_to users_url
+        redirect_to show_user_url(current_user)
       else
         yield
+      end
+    end
+
+    def called_by_admin
+      if current_user.admin?
+        yield 
+      else
+        redirect_to show_user_url(current_user)
       end
     end
    

@@ -1,11 +1,12 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+TomorrowTracker Rails App
+Rebecca Tang
 
-Things you may want to cover:
+This app was developed using ruby 2.3.3p222
 
-* Ruby version
+The server this app is deployed to should run Passenger with Apache 2.
+
 
 * System dependencies
 

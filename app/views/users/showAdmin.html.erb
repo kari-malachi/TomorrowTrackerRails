@@ -1,0 +1,9 @@
+<%= render 'show_common' %>
+<p>
+  This user is an Admin
+</p>
+<% if current_user.admin? && current_user != @user %>
+  <%= link_to 'Revoke Admin Privileges',
+      revoke_admin_path(@user) %><br>
+<% end %>
+<%= render 'show_tail' %>

@@ -1,4 +1,5 @@
-class Stackee < StackUser
+class Stackee < User
+  belongs_to :stack
   has_many :stackers, through: :stack
   def new
     super
