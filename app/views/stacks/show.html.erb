@@ -2,5 +2,15 @@
   <h1>Stack Details</h1>
 </div>
 <%= render 'shared/stack_info' %>
-<%= link_to 'Add Stackers to this Stack', add_stacker_path(@stack) %>
-<%= link_to 'Return to Stack Index', stacks_path %>
+<% if @user.belongs_to_stack?(@stack.id) %>
+  <% if @user.stacker? %>
+    <%= link_to 'Edit this Stack', edit_stack_path(@stack) %>
+  <% elsif @user.stackee? %>
+    TODO: Link to see clues
+  <% end %>
+  <%= link_to 'Leave this Stack', leave_stack_path(@stack) %>
+<% elsif !@user.stack_id %>
+  <%= link_to 'Join this Stack', join_stack_path(@stack) %>
+  <%= link_to 'Return to List of Stacks', stacks_path %>
+<% end %>  
+<%= render 'shared/tail' %>

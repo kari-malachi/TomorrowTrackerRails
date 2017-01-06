@@ -18,8 +18,9 @@ Rails.application.routes.draw do
   post '/stack', to: 'stacks#create', as: 'create_stack'
   get '/stack/edit/:id', to: 'stacks#edit', as: 'edit_stack'
   patch '/stack/:id', to: 'stacks#update', as: 'update_stack'
-  get '/stack/add_stackers/:id', to: 'stacks#add_stacker', as: 'add_stacker'
   get '/stack/:id', to: 'stacks#show', as: 'show_stack'
+  get '/stack/join/:id', to: 'stacks#join', as: 'join_stack'
+  get '/stack/leave/:id', to: 'stacks#leave', as: 'leave_stack'
   get '/stacks', to: 'stacks#index', as: 'stacks'
   delete '/stack/:id', to: 'stacks#destroy', as: 'delete_stack'
 end

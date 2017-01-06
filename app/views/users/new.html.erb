@@ -1,20 +1,15 @@
 <h1>New User</h1>
 
-<% if @user.errors.any? %>
-  <div class='error_messages'>
-    <ul>
-      <% @user.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-    </ul>
-  </div>
-<% end %>
-
+<%= render 'shared/errors', container: @user %>
 <%= form_for @user, url: create_user_path(@user) do |f| %>
   <p>
     Your Name<br>
     <%= f.text_field :name %>
   </p>
+  <p>
+    Are you a Stacker or Stackee?<br>
+    <%= f.radio_button :type, 'Stacker' %> Stacker<br>
+    <%= f.radio_button :type, 'Stackee' %> Stackee
   <p>
     Username<br>
     <%= f.text_field :username %>

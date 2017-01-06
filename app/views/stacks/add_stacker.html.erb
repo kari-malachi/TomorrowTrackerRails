@@ -2,8 +2,15 @@
   <h1>Add Stackers</h1>
 </div>
 <%= render 'shared/stack_info' %>
-<%= form_for @stack, url: update_stack_path(@stack) do |f| %>
-  <%= f.collection_check_boxes :stackers, @users, :id, :name %>
-  <%= f.submit 'Add to Stack' %>
+<% if @users.length > 0 %>
+  <%= form_for @stack, url: update_stackers_path(@stack) do |f| %>
+    <%= f.collection_check_boxes :user_ids, @users, :id, :name %>
+    <%= f.submit 'Add to Stack' %>
+  <% end %>
+  <%= link_to 'Cancel', show_stack_path(@stack) %>
+<% else %>
+  <p>
+    There are no available users to make into stackers.
+    <%= link_to 'Go back.', show_stack_path(@stack) %>
+  </p>
 <% end %>
-<%= link_to 'Cancel', show_stack_path(@stack) %>

@@ -3,10 +3,10 @@
 </div>
 
 <p>
-  Creating a stack will make you into its Stacker.
-  You may add more stackers after creating the stack.
+  Creating a stack will make you one of its Stackers.
 </p>
 
+<%= render 'shared/errors', container: @stack %>
 <%= form_for @stack, url: create_stack_path do |f| %>
   <p>
     Stack Name:
@@ -21,4 +21,4 @@
     </p>
 <% end %>
 
-<%= link_to 'Cancel', show_user_path(@current_user) %>
+<%= link_to 'Cancel', stacks_path %>

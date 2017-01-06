@@ -1,0 +1,9 @@
+<% if container.errors.any? %>
+  <div class='error_messages'>
+    <ul>
+      <% container.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

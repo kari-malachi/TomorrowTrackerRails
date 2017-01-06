@@ -12,14 +12,14 @@
 
 ActiveRecord::Schema.define(version: 20161223002719) do
 
-  create_table "stacks", force: :cascade do |t|
+  create_table "stacks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
-    t.text     "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.text     "description", limit: 65535
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "stack_id"
     t.string   "name"
     t.string   "username"
@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 20161223002719) do
     t.string   "type"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
-    t.index ["stack_id"], name: "index_users_on_stack_id"
+    t.index ["stack_id"], name: "index_users_on_stack_id", using: :btree
   end
 
 end

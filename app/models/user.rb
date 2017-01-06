@@ -9,17 +9,30 @@ class User < ApplicationRecord
   validates :password, :presence => true, :on => :create
 
   before_save :encrypt_password
-  
+
   def admin?
+    # returns true if the user is an Admin
     type == 'Admin'
   end
 
   def stacker?
+    # returns true if the user is a stacker
     type == 'Stacker'
   end
 
   def stackee?
+    # returns true if the user is a stackee
     type == 'Stackee'
+  end
+ 
+  def belongs_to_stack?(id)
+    # returns true if the user belongs to the stack with the given
+    # id. false if the user does not or doesn't belong to a stack at all
+    stack_id == id
+  end
+
+  def is_user?(other)
+    id == other.id
   end
 
   def self.authenticate(username, password)

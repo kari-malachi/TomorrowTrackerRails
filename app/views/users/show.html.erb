@@ -1,11 +1,14 @@
-<%= render 'show_common' %>
-<% if current_user == @user %>
+<%= render 'show_header' %>
+<% if @user.stack_id %>
   <p>
-    <%= link_to 'Create a Stack', new_stack_path %> or 
-    todo: Join a Stack  
+    Your stack's name is: <%= link_to @stack.name,
+      show_stack_path(@stack) %>
   </p>
+<% else %>
+  <%= link_to 'Join a Stack!', stacks_path %>
 <% end %>
 <% if current_user.admin? && current_user != @user%>
+  <p>Admin Actions:</p>  
   <%= link_to 'Delete this User',
       delete_user_path(@user),
       method: :delete %><br>

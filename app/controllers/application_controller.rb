@@ -26,7 +26,15 @@ class ApplicationController < ActionController::Base
         redirect_to show_user_url(current_user)
       end
     end
-   
+
+    def current_user_is_stacker
+      if current_user.stacker?
+        yield
+      else
+        redirect_to show_user_url(current_user)
+      end
+    end
+
     def current_user
       @current_user ||= User.find(session[:user_id]) if session[:user_id]
     end
