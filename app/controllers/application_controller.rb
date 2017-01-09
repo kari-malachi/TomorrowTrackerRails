@@ -35,6 +35,14 @@ class ApplicationController < ActionController::Base
       end
     end
 
+    def current_user_owns_a_stack
+      if current_user.stacker? and current_user.stack_id
+        yield
+      else
+        redirect_to show_user_url(current_user)
+      end
+    end
+
     def current_user
       @current_user ||= User.find(session[:user_id]) if session[:user_id]
     end

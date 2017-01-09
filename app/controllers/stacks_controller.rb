@@ -80,12 +80,6 @@ class StacksController < ApplicationController
     logged_in_checker {
       called_by_admin {
         @stack = Stack.find(params[:id])
-        @stack.stackers.each do |stacker|
-          stacker.update(stack_id: nil)
-        end
-        @stack.stackees.each do |stackee|
-          stackee.update(stack_id: nil)
-        end
         @stack.destroy
         redirect_to stacks_url
       }

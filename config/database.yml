@@ -12,7 +12,7 @@ default: &default
 development:
   <<: *default
   database: rails_dev
-  host: beckymysql.c7sm6zpzgafw.us-east-1.rds.amazonaws.com 
+  host: localhost 
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
