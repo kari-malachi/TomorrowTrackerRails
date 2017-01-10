@@ -69,6 +69,17 @@ class StacksController < ApplicationController
     }
   end
 
+  def clue_tree
+    logged_in_checker {
+      @stack = Stack.find(params[:id])
+      if current_user.belongs_to_stack?(@stack.id) and current_user.stacker?
+        @clues = @stack.clues
+      else
+        redirect_to show_user_url(@current_user)
+      end
+    }
+  end
+
   def index
     logged_in_checker {
       @stacks = Stack.all

@@ -1,0 +1,37 @@
+<div id='page_title'>
+  <h1>Clue Details</h1>
+</div>
+
+<p>
+  <%= @clue.title %>
+</p>
+
+<p>
+  <%= @clue.content %>
+</p>
+
+<% if @clue.next_clues.size > 0 %>
+  <p>  
+    Leads to:<br>
+    <% @clue.next_clues.each do |next_clue| %>
+      <%= link_to next_clue.title, show_clue_path(next_clue) %><br>
+    <% end %>
+  </p>
+<% end %>
+
+<p>
+  This clue is currently assigned to:<br>
+  <% @in_progress.each do |stackee| %>
+    <%= stackee.name %> (<%= stackee.username %>)<br>
+  <% end %>
+</p>
+<p>
+  This clue has been completed by:<br>
+  <% @completed.each do |stackee| %>
+    <%= stackee.name %> (<%= stackee.username %>)<br>
+  <% end %>
+</p>
+
+<%= link_to 'Edit this clue', edit_clue_path(@clue) %>
+<%= link_to 'Add a solution to this clue', new_solution_path %>
+<%= link_to 'Return to Clue List', view_tree_path %>

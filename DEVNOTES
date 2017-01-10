@@ -1,1 +1,3 @@
-
+app/views/clues/show.html.erb -- new_solution_path (bottom of page)
+app/views/clues/show.html.erb -- leads to next_clue section: add descriptions of the connecting solutions and links to editting these solutions
+app/controllers/application_controller.rb -- does it need current_user_owns_a_stack?
