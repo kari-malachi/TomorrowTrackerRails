@@ -16,11 +16,19 @@ Rails.application.routes.draw do
 
   get '/stack/new', to: 'stacks#new', as: 'new_stack'
   post '/stack', to: 'stacks#create', as: 'create_stack'
-  get '/stack/edit/:id', to: 'stacks#edit', as: 'edit_stack'
+  get '/stack/:id/edit', to: 'stacks#edit', as: 'edit_stack'
   patch '/stack/:id', to: 'stacks#update', as: 'update_stack'
   get '/stack/:id', to: 'stacks#show', as: 'show_stack'
-  get '/stack/join/:id', to: 'stacks#join', as: 'join_stack'
-  get '/stack/leave/:id', to: 'stacks#leave', as: 'leave_stack'
+  get '/stack/:id/join', to: 'stacks#join', as: 'join_stack'
+  get '/stack/:id/leave', to: 'stacks#leave', as: 'leave_stack'
+  get '/stack/:id/clue_tree', to: 'stacks#clue_tree', as: 'clue_tree'
   get '/stacks', to: 'stacks#index', as: 'stacks'
   delete '/stack/:id', to: 'stacks#destroy', as: 'delete_stack'
+
+  get '/stack/:stack_id/new_clue', to: 'clues#new', as: 'new_clue'
+  post '/clue', to: 'clues#create', as: 'create_clue'
+  get '/stack/:stack_id/:id/edit', to: 'clues#edit', as: 'edit_clue'
+  patch '/clue/:id', to: 'clues#update', as: 'update_clue'
+  get '/stack/:stack_id/:id', to: 'clues#show', as: 'show_clue'
+
 end

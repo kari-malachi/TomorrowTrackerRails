@@ -1,7 +1,7 @@
 class CluesController < ApplicationController
   def new
     logged_in_checker {
-      current_user_owns_a_stack {  
+      current_user_owns_this_stack {  
         @stack = Stack.find(@current_user.stack_id)
         @clue = Clue.new
       }
@@ -10,7 +10,7 @@ class CluesController < ApplicationController
 
   def create
     logged_in_checker {
-      current_user_owns_a_stack {
+      current_user_owns_this_stack {
         @clue = Clue.new(clue_params)
         if @clue.save
           redirect_to view_tree_path(@clue.stack)
@@ -23,7 +23,7 @@ class CluesController < ApplicationController
 
   def edit
     logged_in_checker {
-      current_user_owns_a_stack {
+      current_user_owns_this_stack {
         @stack = Stack.find(@current_user.stack_id)
         @clue = Clue.find(params[:id])
       }
@@ -32,7 +32,7 @@ class CluesController < ApplicationController
 
   def update
     logged_in_checker {
-      current_user_owns_a_stack {
+      current_user_owns_this_stack {
         @clue = Clue.find(params[:id])
         @clue.update(clue_params)
       }
@@ -41,15 +41,19 @@ class CluesController < ApplicationController
 
   def show
     logged_in_checker {
-      @clue = Clue.find(params[:id])
-      @in_progress = []
-      @completed = []
-      @clue.assignments.each do |assignment|
-        if assignment.complete
-          @completed << assignment.stackee
-        else
-          @in_progress << assignment.stackee
+      if current_user.belongs_to_stack?(@stack.id)
+        @clue = Clue.find(params[:id])
+        @in_progress = []
+        @completed = []
+        @clue.assignments.each do |assignment|
+          if assignment.complete
+            @completed << assignment.stackee
+          else
+            @in_progress << assignment.stackee
+          end
         end
+      else
+        redirect_to show_user_url(@current_user)
       end
     }
   end
@@ -57,5 +61,14 @@ class CluesController < ApplicationController
   private
     def clue_params
       params.require(:clue).permit(:stack, :title, :content)
+    end
+
+    def current_user_owns_this_stack
+      if current_user.belongs_to_stack?(params[:stack_id]) and
+         current_user.stacker?
+        yield
+      else
+        redirect_to show_user_url(@current_user)
+      end
     end
 end
