@@ -1,0 +1,23 @@
+<div id='page_title'>
+  <h1>Clue Tree</h1>
+</div>
+
+<%= link_to 'Write a new clue', new_clue_path(stack_id: @stack) %>
+
+<% @clues.each do |clue| %>
+  <div class='clue_box'>
+    <p>
+      <%= link_to clue.title, show_clue_path(stack_id: @stack, id: clue) %>
+    </p>
+    <% if clue.next_clues.size > 0 %>
+      <p>
+        Leads to:<br>
+        <% clue.next_clues.each do |next_clue| %>
+          <%= link_to next_clue.title, show_clue_path(stack_id: @stack, id: next_clue) %><br>
+        <% end %>
+      </p>
+    <% end %>
+  </div>
+<% end %>
+
+<%= link_to 'Return to Stack Details', show_stack_path(@stack) %>

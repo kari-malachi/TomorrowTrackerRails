@@ -1,0 +1,9 @@
+<div id='page_title'>
+  <h1>Edit this solution</h1>
+</div>
+<%= render 'shared/errors', container: @solution %>
+<%= render 'form', button_msg: 'Save Changes' %>
+<%= link_to 'Delete this Solution',
+    delete_solution_path(stack_id: @stack, clue_id: @clue, id: @solution),
+    method: :delete %>
+<%= link_to 'Cancel', show_clue_path(stack_id: @stack, id: @clue) %>

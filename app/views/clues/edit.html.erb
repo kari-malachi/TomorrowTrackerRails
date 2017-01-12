@@ -2,18 +2,6 @@
   <h1>Edit this Clue</h1>
 <div>
 
-<%= form_for @clue, url: update_clue_path(@clue) do |f| %>
-  <p>
-    Title:
-    <%= f.text_field :title %>
-  </p>
-  <p>
-    Content:
-    <%= f.text_area :content %>
-  </p>
-  <p>
-    <%= f.submit 'Save Changes' %>
-  </p>
-<% end %>
-
-<%= link_to 'Cancel', view_tree_path(@stack) %>
+<%= render 'shared/errors', container: @clue %>
+<%= render 'form', button_msg: 'Save Changes' %>
+<%= link_to 'Cancel', clue_tree_path(@stack) %>

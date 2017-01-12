@@ -1,0 +1,15 @@
+<%= form_for :solution do |f| %>
+  <%= f.hidden_field :clue_id, value: @clue.id %>  
+  <p>
+    Solution Code:
+    <%= f.text_field :content %>
+  </p>
+  <p>
+    <%= f.collection_select :next_clue_id,
+        Clue.all_in_stack(@stack),
+        :id,
+        :title %>
+  <p>
+    <%= f.submit button_msg %>
+  </p>
+<% end %>

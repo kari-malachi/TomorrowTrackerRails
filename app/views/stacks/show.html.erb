@@ -5,6 +5,7 @@
 <% if @user.belongs_to_stack?(@stack.id) %>
   <% if @user.stacker? %>
     <%= link_to 'Edit this Stack', edit_stack_path(@stack) %>
+    <%= link_to 'See the Clue Tree', clue_tree_path(@stack) %>
   <% elsif @user.stackee? %>
     TODO: Link to see clues
   <% end %>

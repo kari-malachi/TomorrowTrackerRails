@@ -10,7 +10,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161223002719) do
+ActiveRecord::Schema.define(version: 20170107010746) do
+
+  create_table "assignments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "clue_id"
+    t.integer  "stackee_id"
+    t.boolean  "completed"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["clue_id"], name: "index_assignments_on_clue_id", using: :btree
+    t.index ["stackee_id"], name: "index_assignments_on_stackee_id", using: :btree
+  end
+
+  create_table "clues", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "stack_id"
+    t.string   "title"
+    t.text     "content",    limit: 65535
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.index ["stack_id"], name: "index_clues_on_stack_id", using: :btree
+  end
+
+  create_table "solutions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "clue_id"
+    t.integer  "next_clue_id"
+    t.string   "content"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["clue_id"], name: "index_solutions_on_clue_id", using: :btree
+    t.index ["next_clue_id"], name: "index_solutions_on_next_clue_id", using: :btree
+  end
 
   create_table "stacks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"

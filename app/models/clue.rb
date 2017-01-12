@@ -14,4 +14,8 @@ class Clue < ApplicationRecord
 
   validates :title, presence: true
   validates :content, presence: true
+
+  def self.all_in_stack(this_stack)
+    self.where(stack_id: this_stack).all
+  end
 end

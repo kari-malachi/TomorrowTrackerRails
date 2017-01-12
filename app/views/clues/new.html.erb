@@ -2,18 +2,8 @@
   <h1>Create a New Clue</h1>
 </div>
 
-<%= form_for @clue do |f| %>
-  <p>
-    Title:
-    <%= f.text_field :title %>
-  </p>
-  <p>
-    Content:
-    <%= f.text_area :content %>
-  </p>
-  <p>
-    <%= f.submit 'Create' %>
-  </p>
-<% end %>
+<%= render 'shared/errors', container: @clue %>
 
-<%= link_to 'Cancel', view_tree_path(@stack) %>
+<%= render 'form', button_msg: 'Create' %>
+
+<%= link_to 'Cancel', clue_tree_path(@stack) %>

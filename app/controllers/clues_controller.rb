@@ -2,7 +2,6 @@ class CluesController < ApplicationController
   def new
     logged_in_checker {
       current_user_owns_this_stack {  
-        @stack = Stack.find(@current_user.stack_id)
         @clue = Clue.new
       }
     }
@@ -13,7 +12,7 @@ class CluesController < ApplicationController
       current_user_owns_this_stack {
         @clue = Clue.new(clue_params)
         if @clue.save
-          redirect_to view_tree_path(@clue.stack)
+          redirect_to clue_tree_path(@stack)
         else
           render 'new'
         end
@@ -24,7 +23,6 @@ class CluesController < ApplicationController
   def edit
     logged_in_checker {
       current_user_owns_this_stack {
-        @stack = Stack.find(@current_user.stack_id)
         @clue = Clue.find(params[:id])
       }
     }
@@ -34,13 +32,18 @@ class CluesController < ApplicationController
     logged_in_checker {
       current_user_owns_this_stack {
         @clue = Clue.find(params[:id])
-        @clue.update(clue_params)
+        if @clue.update(clue_params)
+          redirect_to show_clue_path(stack_id: @stack, id: @clue)
+        else
+          render 'edit'
+        end
       }
     }
   end
 
   def show
     logged_in_checker {
+      @stack = Stack.find(params[:stack_id])
       if current_user.belongs_to_stack?(@stack.id)
         @clue = Clue.find(params[:id])
         @in_progress = []
@@ -58,13 +61,24 @@ class CluesController < ApplicationController
     }
   end
 
+  def destroy
+    logged_in_checker {
+      current_user_owns_this_stack {
+        @clue = Clue.find(params[:id])
+        @clue.destroy
+        redirect_to clue_tree_path(@stack)
+      }
+    }
+  end
+
   private
     def clue_params
-      params.require(:clue).permit(:stack, :title, :content)
+      params.require(:clue).permit(:stack_id, :title, :content)
     end
 
     def current_user_owns_this_stack
-      if current_user.belongs_to_stack?(params[:stack_id]) and
+      @stack = Stack.find(params[:stack_id])
+      if current_user.belongs_to_stack?(@stack.id) and
          current_user.stacker?
         yield
       else
