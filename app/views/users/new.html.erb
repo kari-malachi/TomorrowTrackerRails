@@ -1,7 +1,7 @@
 <h1>New User</h1>
 
 <%= render 'shared/errors', container: @user %>
-<%= form_for @user, url: create_user_path(@user) do |f| %>
+<%= form_for :user do |f| %>
   <p>
     Your Name<br>
     <%= f.text_field :name %>

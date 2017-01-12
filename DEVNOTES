@@ -1,5 +1,3 @@
-app/views/clues/show.html.erb -- new_solution_path (bottom of page)
-app/views/clues/show.html.erb -- leads to next_clue section: add descriptions of the connecting solutions and links to editting these solutions
-New/Edit Clue needs fixing
-Need to add delete clue
 Need to implement stackee side of clue
+
+Allow ordering of clues in clue_tree

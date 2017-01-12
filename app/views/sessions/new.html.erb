@@ -1,7 +1,7 @@
 <h1>New Login</h1>
 
 <%= render 'shared/errors', container: @user %>
-<%= form_tag create_session_path do %>
+<%= form_tag create_session_path do |f| %>
   <p>
     Username<br>
     <%= text_field_tag :username %>
