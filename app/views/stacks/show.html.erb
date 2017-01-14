@@ -7,7 +7,8 @@
     <%= link_to 'Edit this Stack', edit_stack_path(@stack) %>
     <%= link_to 'See the Clue Tree', clue_tree_path(@stack) %>
   <% elsif @user.stackee? %>
-    TODO: Link to see clues
+    <%= link_to 'See Current Objectives', current_objectives_path(@stack) %>
+    <%= link_to 'See Finished Objectives', finished_objectives_path(@stack) %>
   <% end %>
   <%= link_to 'Leave this Stack', leave_stack_path(@stack) %>
 <% elsif !@user.stack_id %>

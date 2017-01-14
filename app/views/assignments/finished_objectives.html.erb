@@ -1,0 +1,12 @@
+<div id='page_title'>
+  <h1>Finished Objectives</h1>
+</div>
+
+<% @finished_clues.each do |clue| %>
+  <div>
+    <%= clue.title %><br>
+    <%= clue.content %><br>
+  </div>
+<% end %>
+
+<%= link_to 'Return to Stack Details', show_stack_path(@stack) %>

@@ -37,4 +37,7 @@ Rails.application.routes.draw do
   get '/stack/:stack_id/:clue_id/:id', to: 'solutions#edit', as: 'edit_solution'
   post '/stack/:stack_id/:clue_id/:id', to: 'solutions#update', as: 'update_solution'
   delete '/stack/:stack_id/:clue_id/:id', to: 'solutions#destroy', as: 'delete_solution'
+
+  get '/stack/:stack_id/current_objectives', to: 'assignments#current_objectives', as: 'current_objectives'
+  get '/stack/:stack_id/finished_objectives', to: 'assignments#finished_objectives', as: 'finished_objectives'
 end

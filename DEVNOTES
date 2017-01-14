@@ -1,3 +1,4 @@
-Need to implement stackee side of clue
-
+Write view for finished_objectives, finish view for current_objectives
+Do stuff for submit_solution, probably put that under clues_controller
+Auto first assignment for new stackees
 Allow ordering of clues in clue_tree

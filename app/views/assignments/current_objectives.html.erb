@@ -1,0 +1,13 @@
+<div id='page_title'>
+  <h1>Current Objectives</h1>
+</div>
+
+<% @current_clues.each do |clue| %>
+  <div>
+    <%= clue.title %><br>
+    <%= clue.content %><br>
+    <%= link_to 'Submit a Solution', submit_solution_path %>
+  </div>
+<% end %>
+
+<%= link_to 'Return to Stack Details', show_stack_path(@stack) %>
